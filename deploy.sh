@@ -15,6 +15,26 @@ if  [ "$1" == "--create" ]; then
     echo ""
     echo " Notre option est --create"
     echo ""
+# Si option --start
+elif  [ "$1" == "--start" ]; then
+    echo ""
+    echo " Notre option est --start"
+    echo ""
+# Si option --ansible
+elif  [ "$1" == "--ansible" ]; then
+    echo ""
+    echo " Notre option est --ansible"
+    echo ""
+# Si option --infos
+elif  [ "$1" == "--infos" ]; then
+    echo ""
+    echo " Notre option est --infos"
+    echo ""
+# Si option --drop
+elif  [ "$1" == "--drop" ]; then
+    echo ""
+    echo " Notre option est --drop"
+    echo ""
 #Si aucune option affichage de l'aide
 else
     echo "
