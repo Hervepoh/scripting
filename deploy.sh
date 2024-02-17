@@ -10,7 +10,10 @@
 #
 ##############################################################################
 
-echo $#
+echo "Nb de parametres : " $#
+echo "Nom du fichier : " $0
+echo "Liste des parametres: " $*
+echo "Liste des parametres dans un tableau " $@
 
 
 # Si option --create
