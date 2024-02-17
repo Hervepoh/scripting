@@ -27,4 +27,23 @@ else
     "
 fi
 
+# Operateur texte []
+# +-  ==  : egal
+# +-  !=  : different de
+# +-  !   : regation
 
+# Operateur filesystem
+# +-  -z  : variable vide
+# +-  -f  : ficher existe
+# +-  -d  : repertoire existe
+
+# Operateur chiffres (())
+# +-  ... tous les operateurs precedents
+# +-  <= : inf ou egal
+# +-  >=   : sup ou egal
+
+# $1
+# $#
+# $*
+# $@
+# $0
