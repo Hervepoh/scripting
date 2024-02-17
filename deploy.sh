@@ -21,6 +21,9 @@ if  [ "$1" == "--create" ]; then
     echo ""
     echo " Notre option est --create"
     echo ""
+    # lancer un container docker 
+    docker run -tid --name alpine alpine:latest
+
 # Si option --start
 elif  [ "$1" == "--start" ]; then
     echo ""
