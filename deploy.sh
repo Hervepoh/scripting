@@ -10,10 +10,10 @@
 #
 ##############################################################################
 
-echo "Nb de parametres : " $#
-echo "Nom du fichier : " $0
-echo "Liste des parametres: " $*
-echo "Liste des parametres dans un tableau " $@
+# echo "Nb de parametres : " $#
+# echo "Nom du fichier : " $0
+# echo "Liste des parametres: " $*
+# echo "Liste des parametres dans un tableau " $@
 
 
 # Si option --create
@@ -21,14 +21,36 @@ if  [ "$1" == "--create" ]; then
     echo ""
     echo " Notre option est --create"
     echo ""
-    # lancer un container docker 
-    docker run -tid --name $USER-alpine alpine:latest
-
+    
+    nb_machines=1
+    [ $2=="" ] && nb_machines=$2
+    echo $nb_machines
+    #if [ $2=="" ]; then
+    #   nb_machines=$2
+    #   echo ON
+    #else
+    #   nb_machines=1
+    #   echo OFF
+    #fi
+    echo "############################################"
+    echo "#      Debut création des containeurs      #"
+    echo "############################################"
+    echo ""
+    for i in $(seq 1 $nb_machines); do
+        docker run -tid --name "$USER-alpine-$i" alpine:latest
+        echo "Container $USER-alpine-$i crée"
+        echo "-------------------------------"
+    done 
+    echo ""
+    echo "############################################"
+    echo "#      Debut création des containeurs      #"
+    echo "############################################"
 # Si option --start
 elif  [ "$1" == "--start" ]; then
     echo ""
     echo " Notre option est --start"
     echo ""
+    
 # Si option --ansible
 elif  [ "$1" == "--ansible" ]; then
     echo ""
