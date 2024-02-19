@@ -19,3 +19,17 @@
 # "moyen" si la note est entre 10 et 12
 # "insuffisant" si la note est inférieur à 10
 
+echo "Saisir une note"
+read note
+
+if [ $note >= 16 ]; then
+   echo "très bien"
+elseif [ $note >= 14 ]; then
+   echo "bien"
+elseif [ $note >= 12 ]; then
+   echo "assez bien"
+elseif [ $note >= 10 ]; then
+   echo "moyen"
+else
+    echo "insuffisant"
+fi
