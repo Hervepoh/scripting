@@ -15,30 +15,26 @@
 # echo "Liste des parametres: " $*
 # echo "Liste des parametres dans un tableau " $@
 
+id_machines="docker"
+if [ ! -z $USER ]; then
+    id_machines=$USER
+else
+    id_machines=$USERNAME
+fi
 
 # Si option --create
 if  [ "$1" == "--create" ]; then
-    echo ""
-    echo " Notre option est --create"
-    echo ""
     
     nb_machines=1
     [ $2=="" ] && nb_machines=$2
-    echo $nb_machines
-    #if [ $2=="" ]; then
-    #   nb_machines=$2
-    #   echo ON
-    #else
-    #   nb_machines=1
-    #   echo OFF
-    #fi
+    
     echo "############################################"
     echo "#      Debut création des containeurs      #"
     echo "############################################"
     echo ""
     for i in $(seq 1 $nb_machines); do
-        docker run -tid --name "$USER-alpine-$i" alpine:latest
-        echo "Container $USER-alpine-$i crée"
+        docker run -tid --name "$id_machines-alpine-$i" alpine:latest
+        echo "Container $id_machines-alpine-$i crée"
         echo "-------------------------------"
     done 
     echo ""
