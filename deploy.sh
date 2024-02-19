@@ -45,9 +45,24 @@ if  [ "$1" == "--create" ]; then
 
 # Si option --drop
 elif  [ "$1" == "--drop" ]; then
+    echo "############################################"
+    echo "#    Debut suppression des containeurs     #"
+    echo "############################################"
     echo ""
-    echo " Notre option est --drop"
+
+    ids=$(docker ps -a | grep $USERNAME-alpine | awk '{print $1}')
+    # echo $ids
+    for i in $ids; do
+       # echo $i
+       docker stop $i
+       docker rm $i
+    done
+
     echo ""
+    echo "############################################"
+    echo "#     Fin suppression des containeurs      #"
+    echo "############################################"
+
 
 # Si option --start
 elif  [ "$1" == "--start" ]; then
