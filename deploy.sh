@@ -43,7 +43,7 @@ if  [ "$1" == "--create" ]; then
     done 
     echo ""
     echo "############################################"
-    echo "#      Debut création des containeurs      #"
+    echo "#        Fin création des containeurs      #"
     echo "############################################"
 
 
