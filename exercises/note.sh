@@ -22,13 +22,13 @@
 echo "Saisir une note"
 read note
 
-if [ $note >= 16 ]; then
+if (( $note >= 16 )); then
    echo "très bien"
-elseif [ $note >= 14 ]; then
+elif (( $note >= 14 )) && (( $note < 16 )); then
    echo "bien"
-elseif [ $note >= 12 ]; then
+elif (( $note >= 12 )) && (( $note < 14 )); then
    echo "assez bien"
-elseif [ $note >= 10 ]; then
+elif (( $note >= 10 )); then
    echo "moyen"
 else
     echo "insuffisant"
