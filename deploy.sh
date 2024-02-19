@@ -45,6 +45,14 @@ if  [ "$1" == "--create" ]; then
     echo "############################################"
     echo "#      Debut création des containeurs      #"
     echo "############################################"
+
+
+# Si option --drop
+elif  [ "$1" == "--drop" ]; then
+    echo ""
+    echo " Notre option est --drop"
+    echo ""
+
 # Si option --start
 elif  [ "$1" == "--start" ]; then
     echo ""
@@ -56,16 +64,13 @@ elif  [ "$1" == "--ansible" ]; then
     echo ""
     echo " Notre option est --ansible"
     echo ""
+
 # Si option --infos
 elif  [ "$1" == "--infos" ]; then
     echo ""
     echo " Notre option est --infos"
     echo ""
-# Si option --drop
-elif  [ "$1" == "--drop" ]; then
-    echo ""
-    echo " Notre option est --drop"
-    echo ""
+
 #Si aucune option affichage de l'aide
 else
     echo "
