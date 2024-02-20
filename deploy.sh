@@ -15,11 +15,11 @@
 # echo "Liste des parametres: " $*
 # echo "Liste des parametres dans un tableau " $@
 
-id_machines="docker"
+machine_name="docker"
 if [ ! -z $USER ]; then
-    id_machines=$USER
+    machine_name=$USER
 else
-    id_machines=$USERNAME
+    machine_name=$USERNAME
 fi
 
 # Si option --create
@@ -27,14 +27,16 @@ if  [ "$1" == "--create" ]; then
     
     nb_machines=1
     [ $2=="" ] && nb_machines=$2
+    # idmax=$(docker ps -a --format {{.Names}} | grep $USERNAME-alpine |  awk -F '-' '{print $3}' | sort -r | head -1)
+    idmax=$(docker ps -a --format {{.Names}} |  awk -F '-' -v user=$machine_name '$0 ~ user"-alpine" {print $3}' | sort -r | head -1)
     
     echo "############################################"
     echo "#      Debut création des containeurs      #"
     echo "############################################"
     echo ""
     for i in $(seq 1 $nb_machines); do
-        docker run -tid --name "$id_machines-alpine-$i" alpine:latest
-        echo "Container $id_machines-alpine-$i crée"
+        docker run -tid --name "$machine_name-alpine-$i" alpine:latest
+        echo "Container $machine_name-alpine-$i crée"
         echo "-------------------------------"
     done 
     echo ""
