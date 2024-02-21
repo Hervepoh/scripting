@@ -86,10 +86,7 @@ elif  [ "$1" == "--start" ]; then
  
     # docker container restart $(docker ps -a --format "{{ .Names }}" | awk '$0 ~ "herve.ngando-alpine" { print $0 }')
     docker start $(docker ps -a | grep $machine_name-alpine | awk '{print $1}') 
-    for docker_id in $(docker ps | grep $machine_name-alpine | awk '{print $1}'); do
-        # docker inspect --format "{{.Name}} . {{.NetworkSettings.IPAddress }}" $docker_id
-        docker inspect -f " => {{.Name}} : {{.NetworkSettings.IPAddress }} " $docker_id
-    done
+   
     echo -e "\n############################################"
     echo "#      Existing containeurs restart        #"
     echo -e "############################################\n"
@@ -102,9 +99,15 @@ elif  [ "$1" == "--ansible" ]; then
 
 # Si option --infos
 elif  [ "$1" == "--infos" ]; then
-    echo ""
-    echo " Notre option est --infos"
-    echo ""
+
+    echo -e "\n############################################"
+    echo "#      Informations sur les containeurs        #"
+    echo -e "############################################\n"
+    # Information sur les containeurs
+    for docker_id in $(docker ps | grep $machine_name-alpine | awk '{print $1}'); do
+        # docker inspect --format "{{.Name}} . {{.NetworkSettings.IPAddress }}" $docker_id
+        docker inspect -f " => {{.Name}} : {{.NetworkSettings.IPAddress }} " $docker_id
+    done
 
 #Si aucune option affichage de l'aide
 else
