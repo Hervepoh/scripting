@@ -26,15 +26,24 @@ fi
 if  [ "$1" == "--create" ]; then
     
     nb_machines=1
-    [ $2=="" ] && nb_machines=$2
+    [ ! -z "$2" ] && nb_machines=$2
     # idmax=$(docker ps -a --format {{.Names}} | grep $USERNAME-alpine |  awk -F '-' '{print $3}' | sort -r | head -1)
     idmax=$(docker ps -a --format {{.Names}} |  awk -F '-' -v user=$machine_name '$0 ~ user"-alpine" {print $3}' | sort -r | head -1)
     
+    # Definition varibale min et max
+    min=0
+    max=0
+
+    [ -z $idmax ] && idmax=0 
+    min=$((idmax+1))
+    max=$((min+nb_machines-1))
+
     echo "############################################"
     echo "#      Debut création des containeurs      #"
     echo "############################################"
     echo ""
-    for i in $(seq 1 $nb_machines); do
+    #for i in $(seq 1 $nb_machines); do
+    for i in $(seq $min $max); do
         docker run -tid --name "$machine_name-alpine-$i" alpine:latest
         echo "Container $machine_name-alpine-$i crée"
         echo "-------------------------------"
@@ -56,8 +65,8 @@ elif  [ "$1" == "--drop" ]; then
     # echo $ids
     for i in $ids; do
        # echo $i
-       docker stop $i
-       docker rm $i
+       # docker stop $i
+       docker rm -f $i
     done
 
     echo ""
