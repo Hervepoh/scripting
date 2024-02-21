@@ -27,16 +27,19 @@ if  [ "$1" == "--create" ]; then
     
     nb_machines=1
     [ ! -z "$2" ] && nb_machines=$2
-    # idmax=$(docker ps -a --format {{.Names}} | grep $USERNAME-alpine |  awk -F '-' '{print $3}' | sort -r | head -1)
-    idmax=$(docker ps -a --format {{.Names}} |  awk -F '-' -v user=$machine_name '$0 ~ user"-alpine" {print $3}' | sort -r | head -1)
     
-    # Definition varibale min et max
+    # Definition varibale min & max
     min=0
     max=0
-
+    
+    # Recuperation de idmax
+    # idmax=$(docker ps -a --format {{.Names}} | grep $USERNAME-alpine |  awk -F '-' '{print $3}' | sort -r | head -1)
+    idmax=$(docker ps -a --format {{.Names}} |  awk -F '-' -v user=$machine_name '$0 ~ user"-alpine" {print $3}' | sort -r | head -1)
     [ -z $idmax ] && idmax=0 
+
+    # redefinition de min & max
     min=$((idmax+1))
-    max=$((min+nb_machines-1))
+    max=$((idmax+nb_machines))
 
     echo "############################################"
     echo "#      Debut création des containeurs      #"
