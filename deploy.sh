@@ -80,9 +80,19 @@ elif  [ "$1" == "--drop" ]; then
 
 # Si option --start
 elif  [ "$1" == "--start" ]; then
-    echo ""
-    echo " Notre option est --start"
-    echo ""
+    echo -e "\n############################################"
+    echo "#      Restart existing containeurs        #"
+    echo -e "############################################\n"
+ 
+    # docker container restart $(docker ps -a --format "{{ .Names }}" | awk '$0 ~ "herve.ngando-alpine" { print $0 }')
+    docker start $(docker ps -a | grep $machine_name-alpine | awk '{print $1}') 
+    for docker_id in $(docker ps | grep $machine_name-alpine | awk '{print $1}'); do
+        # docker inspect --format "{{.Name}} . {{.NetworkSettings.IPAddress }}" $docker_id
+        docker inspect -f " => {{.Name}} : {{.NetworkSettings.IPAddress }} " $docker_id
+    done
+    echo -e "\n############################################"
+    echo "#      Existing containeurs restart        #"
+    echo -e "############################################\n"
     
 # Si option --ansible
 elif  [ "$1" == "--ansible" ]; then
