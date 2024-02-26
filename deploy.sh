@@ -141,3 +141,6 @@ fi
 # $*
 # $@
 # $0
+
+
+# $?  test  si le command est ok retoune 0 sinon retourne 1
